@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Wig Vibe Quiz - Discover Your Perfect Wig Style</title>
+    <meta name="description" content="Take the fun Wig Vibe Quiz and discover your perfect wig style! Get personalized recommendations, care tips, and confidence boosters.">
+    <meta property="og:title" content="Wig Vibe Quiz - What's Your Wig Personality?">
+    <meta property="og:description" content="Find your perfect wig match in under 2 minutes!">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Floating decorative elements -->
+        <div class="floating-sparkle sparkle-1">✨</div>
+        <div class="floating-sparkle sparkle-2">💫</div>
+        <div class="floating-sparkle sparkle-3">✨</div>
+
+        <!-- Welcome Screen -->
+        <section id="welcome-screen" class="screen active">
+            <div class="welcome-content">
+                <div class="logo-badge">
+                    <span class="crown">👑</span>
+                </div>
+                <h1 class="main-title">Wig Vibe Quiz</h1>
+                <p class="tagline">Discover your perfect wig vibe!</p>
+                <p class="subtext">Pick your style, your mood, and your confidence — we'll do the rest.</p>
+
+                <div class="wig-preview-grid">
+                    <div class="preview-wig" style="--delay: 0s">
+                        <svg viewBox="0 0 100 100" class="wig-icon">
+                            <!-- Sleek straight wig -->
+                            <path d="M50 15 Q30 20 25 40 Q20 70 30 85 L70 85 Q80 70 75 40 Q70 20 50 15" fill="url(#gradient1)" stroke="#2d2d2d" stroke-width="1"/>
+                            <defs>
+                                <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#1a1a2e"/>
+                                    <stop offset="100%" style="stop-color:#16213e"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="preview-wig" style="--delay: 0.1s">
+                        <svg viewBox="0 0 100 100" class="wig-icon">
+                            <!-- Curly wig -->
+                            <path d="M50 12 Q25 18 20 35 C15 50 18 65 25 80 Q35 90 50 88 Q65 90 75 80 C82 65 85 50 80 35 Q75 18 50 12" fill="url(#gradient2)" stroke="#2d2d2d" stroke-width="1"/>
+                            <circle cx="35" cy="45" r="8" fill="#4a3728" opacity="0.6"/>
+                            <circle cx="55" cy="38" r="7" fill="#4a3728" opacity="0.6"/>
+                            <circle cx="68" cy="50" r="8" fill="#4a3728" opacity="0.6"/>
+                            <circle cx="42" cy="62" r="9" fill="#4a3728" opacity="0.6"/>
+                            <circle cx="60" cy="68" r="8" fill="#4a3728" opacity="0.6"/>
+                            <defs>
+                                <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#5d4037"/>
+                                    <stop offset="100%" style="stop-color:#3e2723"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="preview-wig" style="--delay: 0.2s">
+                        <svg viewBox="0 0 100 100" class="wig-icon">
+                            <!-- Braided wig -->
+                            <path d="M50 10 Q20 15 18 30 L15 85 L35 85 L38 35 Q40 25 50 22 Q60 25 62 35 L65 85 L85 85 L82 30 Q80 15 50 10" fill="url(#gradient3)" stroke="#2d2d2d" stroke-width="1"/>
+                            <line x1="25" y1="40" x2="25" y2="82" stroke="#1a1a1a" stroke-width="2" stroke-dasharray="4,3"/>
+                            <line x1="75" y1="40" x2="75" y2="82" stroke="#1a1a1a" stroke-width="2" stroke-dasharray="4,3"/>
+                            <defs>
+                                <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#1a1a1a"/>
+                                    <stop offset="100%" style="stop-color:#2d2d2d"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="preview-wig" style="--delay: 0.3s">
+                        <svg viewBox="0 0 100 100" class="wig-icon">
+                            <!-- Colored wig -->
+                            <path d="M50 15 Q28 22 22 45 Q18 70 28 85 L72 85 Q82 70 78 45 Q72 22 50 15" fill="url(#gradient4)" stroke="#8b5cf6" stroke-width="2"/>
+                            <defs>
+                                <linearGradient id="gradient4" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ec4899"/>
+                                    <stop offset="50%" style="stop-color:#8b5cf6"/>
+                                    <stop offset="100%" style="stop-color:#06b6d4"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+
+                <button class="cta-button pulse" onclick="startQuiz()">
+                    <span>Play Now</span>
+                    <span class="arrow">→</span>
+                </button>
+
+                <p class="time-hint">⏱️ Takes less than 2 minutes!</p>
+            </div>
+        </section>
+
+        <!-- Quiz Screen -->
+        <section id="quiz-screen" class="screen">
+            <div class="quiz-header">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <span class="progress-text" id="progress-text">1 of 6</span>
+                </div>
+            </div>
+
+            <div class="question-container" id="question-container">
+                <!-- Questions will be dynamically inserted here -->
+            </div>
+        </section>
+
+        <!-- Loading Screen -->
+        <section id="loading-screen" class="screen">
+            <div class="loading-content">
+                <div class="loading-wig">
+                    <svg viewBox="0 0 120 120" class="spinning-wig">
+                        <circle cx="60" cy="60" r="50" fill="none" stroke="url(#loadingGradient)" stroke-width="4" stroke-dasharray="100,200" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="loadingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ec4899"/>
+                                <stop offset="100%" style="stop-color:#8b5cf6"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span class="loading-emoji">💇🏾‍♀️</span>
+                </div>
+                <h2 class="loading-text">Finding your perfect vibe...</h2>
+                <p class="loading-subtext" id="loading-subtext">Analyzing your style preferences</p>
+            </div>
+        </section>
+
+        <!-- Results Screen -->
+        <section id="results-screen" class="screen">
+            <div class="results-content">
+                <div class="confetti" id="confetti"></div>
+
+                <div class="result-header">
+                    <span class="result-emoji">✨</span>
+                    <h2 class="result-title">Your Wig Style</h2>
+                </div>
+
+                <div class="result-card" id="result-card">
+                    <div class="wig-showcase" id="wig-showcase">
+                        <!-- Result wig image will be inserted here -->
+                    </div>
+
+                    <h3 class="wig-name" id="wig-name">Curly Wave Queen</h3>
+
+                    <div class="match-badge">
+                        <span class="match-percent" id="match-percent">85%</span>
+                        <span class="match-label">Style Match</span>
+                    </div>
+
+                    <div class="result-section why-section">
+                        <h4>💫 Why It Works For You</h4>
+                        <p id="why-text">Your bold, fun personality pairs perfectly with bouncy curls that make a statement.</p>
+                    </div>
+
+                    <div class="result-section tips-section">
+                        <h4>💆🏾‍♀️ Hair Care Tips</h4>
+                        <ul id="tips-list">
+                            <li>Wash gently once a week with sulfate-free shampoo</li>
+                            <li>Moisturize daily with leave-in conditioner</li>
+                            <li>Store on a wig stand to maintain shape</li>
+                        </ul>
+                    </div>
+
+                    <div class="result-section price-section">
+                        <h4>💰 Price Range</h4>
+                        <p class="price-range" id="price-range">₦20,000 – ₦35,000</p>
+                    </div>
+
+                    <div class="confidence-line" id="confidence-line">
+                        <p>"Big curls, big energy — own your look today!"</p>
+                    </div>
+                </div>
+
+                <div class="result-actions">
+                    <button class="share-button" onclick="shareResult()">
+                        <span>📱</span> Share Result
+                    </button>
+                    <button class="replay-button" onclick="replayQuiz()">
+                        <span>🔄</span> Try Another Vibe
+                    </button>
+                </div>
+
+                <p class="replay-hint">Feeling a different vibe? Tap above to explore another wig mood!</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
