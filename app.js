@@ -1,5 +1,5 @@
 /* ==========================================
-   WIG VIBE QUIZ - MAIN APPLICATION
+   WIG VIBE QUIZ - ENHANCED INTERACTIVE VERSION
    ========================================== */
 
 // ==========================================
@@ -144,7 +144,6 @@ const wigStyles = {
             <path d="M60 15 L60 115" stroke="url(#braidGrad)" stroke-width="8" stroke-linecap="round"/>
             <path d="M78 20 L82 115" stroke="url(#braidGrad)" stroke-width="10" stroke-linecap="round"/>
             <path d="M92 18 L98 115" stroke="url(#braidGrad)" stroke-width="12" stroke-linecap="round"/>
-            <!-- Braid patterns -->
             <path d="M22 30 L28 35 L22 40 L28 45 L22 50 L28 55 L22 60 L28 65 L22 70 L28 75 L22 80 L28 85 L22 90 L28 95 L22 100 L28 105" stroke="#333" stroke-width="1" fill="none"/>
             <path d="M92 30 L98 35 L92 40 L98 45 L92 50 L98 55 L92 60 L98 65 L92 70 L98 75 L92 80 L98 85 L92 90 L98 95 L92 100 L98 105" stroke="#333" stroke-width="1" fill="none"/>
             <path d="M56 25 L64 30 L56 35 L64 40 L56 45 L64 50 L56 55 L64 60 L56 65 L64 70 L56 75 L64 80 L56 85 L64 90 L56 95 L64 100" stroke="#333" stroke-width="0.8" fill="none"/>
@@ -206,11 +205,8 @@ const wigStyles = {
                     <stop offset="100%" style="stop-color:#1f1509"/>
                 </linearGradient>
             </defs>
-            <!-- Hair band area -->
             <path d="M30 35 Q60 30 90 35" stroke="#1a1a1a" stroke-width="8" fill="none" stroke-linecap="round"/>
-            <!-- Main hair -->
             <path d="M25 38 Q20 55 22 80 Q25 100 35 115 L85 115 Q95 100 98 80 Q100 55 95 38 Q85 35 60 33 Q35 35 25 38" fill="url(#halfGrad)"/>
-            <!-- Texture -->
             <circle cx="35" cy="55" r="8" fill="#4d3319" opacity="0.5"/>
             <circle cx="55" cy="50" r="7" fill="#4d3319" opacity="0.5"/>
             <circle cx="75" cy="52" r="8" fill="#4d3319" opacity="0.5"/>
@@ -244,7 +240,7 @@ const questions = [
         id: 'vibe',
         emoji: '✨',
         question: 'Pick your vibe today',
-        subtext: 'Tap the wig that matches your mood!',
+        subtext: 'Tap the wig that speaks to your soul!',
         type: 'image-select',
         layout: 'two-column',
         options: [
@@ -283,7 +279,7 @@ const questions = [
         emoji: '🎯',
         question: 'What\'s the occasion?',
         subtext: 'Where are you taking this look?',
-        type: 'image-select',
+        type: 'emoji-select',
         layout: 'two-column',
         options: [
             {
@@ -295,7 +291,7 @@ const questions = [
             },
             {
                 id: 'datenight',
-                text: 'Date / Night Out',
+                text: 'Date Night',
                 description: 'Time to turn heads!',
                 emoji: '🌙',
                 scores: { bodyWave: 3, curlyBob: 2, colored: 2, laceFront: 2 }
@@ -309,7 +305,7 @@ const questions = [
             },
             {
                 id: 'content',
-                text: 'Photoshoot / Content',
+                text: 'Photoshoot',
                 description: 'Camera-ready glam',
                 emoji: '📸',
                 scores: { colored: 3, curlyBob: 2, bodyWave: 2, laceFront: 2 }
@@ -319,7 +315,7 @@ const questions = [
     {
         id: 'maintenance',
         emoji: '🛠️',
-        question: 'How much effort for styling?',
+        question: 'How much styling effort?',
         subtext: 'Be honest with yourself, queen!',
         type: 'slider',
         options: [
@@ -331,8 +327,8 @@ const questions = [
     {
         id: 'confidence',
         emoji: '💪',
-        question: 'What\'s your confidence mood?',
-        subtext: 'How are you feeling today?',
+        question: 'What\'s your energy today?',
+        subtext: 'How are you feeling right now?',
         type: 'emoji-select',
         layout: 'two-column',
         options: [
@@ -369,8 +365,8 @@ const questions = [
     {
         id: 'expression',
         emoji: '💇🏾‍♀️',
-        question: 'Favorite hair expression?',
-        subtext: 'What makes you feel most yourself?',
+        question: 'Your favorite hair vibe?',
+        subtext: 'What makes you feel most YOU?',
         type: 'image-select',
         layout: 'two-column',
         options: [
@@ -383,14 +379,14 @@ const questions = [
             },
             {
                 id: 'curls',
-                text: 'Big Curls / Waves',
+                text: 'Big Curls & Waves',
                 description: 'Volume and movement',
                 wigType: 'bodyWave',
                 scores: { bodyWave: 3, curlyBob: 3 }
             },
             {
                 id: 'braids',
-                text: 'Braided / Textured',
+                text: 'Braided & Textured',
                 description: 'Cultural and protective',
                 wigType: 'braided',
                 scores: { braided: 3, halfWig: 1 }
@@ -407,15 +403,15 @@ const questions = [
     {
         id: 'budget',
         emoji: '💰',
-        question: 'What\'s your budget range?',
-        subtext: 'We\'ll find the best options for you',
+        question: 'What\'s your budget?',
+        subtext: 'We\'ll find perfect options for you!',
         type: 'budget-select',
         layout: 'single-column',
         options: [
             {
                 id: 'low',
                 text: '₦5,000 – ₦15,000',
-                description: 'Budget-friendly options',
+                description: 'Budget-friendly beauties',
                 emoji: '💵',
                 budgetLevel: 'low',
                 scores: { halfWig: 2, braided: 2 }
@@ -423,7 +419,7 @@ const questions = [
             {
                 id: 'medium',
                 text: '₦15,000 – ₦40,000',
-                description: 'Quality and value balance',
+                description: 'Quality meets value',
                 emoji: '💳',
                 budgetLevel: 'medium',
                 scores: { bodyWave: 1, curlyBob: 1, boneStraight: 1 }
@@ -431,7 +427,7 @@ const questions = [
             {
                 id: 'high',
                 text: '₦40,000+',
-                description: 'Premium quality wigs',
+                description: 'Premium luxury wigs',
                 emoji: '💎',
                 budgetLevel: 'high',
                 scores: { laceFront: 2, colored: 2 }
@@ -441,7 +437,7 @@ const questions = [
 ];
 
 // ==========================================
-// QUIZ STATE
+// GAME STATE
 // ==========================================
 let currentQuestion = 0;
 let answers = [];
@@ -455,21 +451,119 @@ let scores = {
     halfWig: 0
 };
 let selectedBudget = 'medium';
+let streak = 0;
+let totalPoints = 0;
+
+// ==========================================
+// HAPTIC FEEDBACK (Visual)
+// ==========================================
+function triggerHaptic(type = 'light') {
+    if ('vibrate' in navigator) {
+        const patterns = {
+            light: [10],
+            medium: [20],
+            heavy: [30, 10, 30],
+            success: [10, 50, 10, 50, 10]
+        };
+        navigator.vibrate(patterns[type] || patterns.light);
+    }
+}
+
+// ==========================================
+// RIPPLE EFFECT
+// ==========================================
+function createRipple(event, element) {
+    const rect = element.getBoundingClientRect();
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+
+    const size = Math.max(rect.width, rect.height);
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = (event.clientX - rect.left - size / 2) + 'px';
+    ripple.style.top = (event.clientY - rect.top - size / 2) + 'px';
+
+    element.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+}
+
+// ==========================================
+// PARTICLE BURST EFFECT
+// ==========================================
+function createParticleBurst(x, y, count = 12) {
+    const colors = ['#ec4899', '#8b5cf6', '#06b6d4', '#fbbf24', '#10b981', '#f472b6'];
+    const container = document.querySelector('.app-container');
+
+    for (let i = 0; i < count; i++) {
+        const particle = document.createElement('div');
+        particle.style.cssText = `
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: ${colors[Math.floor(Math.random() * colors.length)]};
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+            left: ${x}px;
+            top: ${y}px;
+        `;
+
+        const angle = (i / count) * Math.PI * 2;
+        const velocity = 80 + Math.random() * 60;
+        const vx = Math.cos(angle) * velocity;
+        const vy = Math.sin(angle) * velocity;
+
+        container.appendChild(particle);
+
+        let posX = 0, posY = 0, opacity = 1, scale = 1;
+        const animate = () => {
+            posX += vx * 0.02;
+            posY += vy * 0.02 + 2; // gravity
+            opacity -= 0.025;
+            scale -= 0.015;
+
+            particle.style.transform = `translate(${posX}px, ${posY}px) scale(${Math.max(0, scale)})`;
+            particle.style.opacity = Math.max(0, opacity);
+
+            if (opacity > 0) {
+                requestAnimationFrame(animate);
+            } else {
+                particle.remove();
+            }
+        };
+        requestAnimationFrame(animate);
+    }
+}
 
 // ==========================================
 // SCREEN NAVIGATION
 // ==========================================
 function showScreen(screenId) {
-    document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.remove('active');
-    });
-    document.getElementById(screenId).classList.add('active');
+    const currentScreen = document.querySelector('.screen.active');
+    const newScreen = document.getElementById(screenId);
+
+    if (currentScreen) {
+        currentScreen.classList.add('exit');
+        setTimeout(() => {
+            currentScreen.classList.remove('active', 'exit');
+            newScreen.classList.add('active');
+        }, 300);
+    } else {
+        newScreen.classList.add('active');
+    }
 }
 
 // ==========================================
 // START QUIZ
 // ==========================================
 function startQuiz() {
+    triggerHaptic('medium');
+
+    // Create burst effect from button
+    const button = document.querySelector('.cta-button');
+    const rect = button.getBoundingClientRect();
+    createParticleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 20);
+
+    // Reset state
     currentQuestion = 0;
     answers = [];
     scores = {
@@ -482,9 +576,13 @@ function startQuiz() {
         halfWig: 0
     };
     selectedBudget = 'medium';
+    streak = 0;
+    totalPoints = 0;
 
-    showScreen('quiz-screen');
-    renderQuestion();
+    setTimeout(() => {
+        showScreen('quiz-screen');
+        renderQuestion();
+    }, 200);
 }
 
 // ==========================================
@@ -496,12 +594,21 @@ function renderQuestion() {
     const progressFill = document.getElementById('progress-fill');
     const progressText = document.getElementById('progress-text');
 
-    // Update progress
+    // Update progress with animation
     const progress = ((currentQuestion + 1) / questions.length) * 100;
     progressFill.style.width = `${progress}%`;
     progressText.textContent = `${currentQuestion + 1} of ${questions.length}`;
 
-    let html = `<div class="question-wrapper">`;
+    let html = '';
+
+    // Streak display
+    html += `<div class="streak-container">`;
+    html += `<div class="streak-badge ${streak < 2 ? 'hidden' : ''}">`;
+    html += `<span class="streak-fire">🔥</span>`;
+    html += `<span>${streak} streak!</span>`;
+    html += `</div></div>`;
+
+    html += `<div class="question-wrapper">`;
     html += `<span class="question-emoji">${question.emoji}</span>`;
     html += `<h2 class="question-text">${question.question}</h2>`;
     html += `<p class="question-subtext">${question.subtext}</p>`;
@@ -560,15 +667,15 @@ function renderSliderQuestion(question) {
     html += `</div>`;
     html += `<div class="slider-labels">`;
 
-    question.options.forEach(option => {
-        html += `<div class="slider-label">`;
+    question.options.forEach((option, index) => {
+        html += `<div class="slider-label" data-value="${option.value}">`;
         html += `<span class="slider-label-emoji">${option.emoji}</span>`;
         html += `<span>${option.label}</span>`;
         html += `</div>`;
     });
 
     html += `</div>`;
-    html += `<div class="slider-value" id="slider-value">Medium maintenance — you got this! 💅</div>`;
+    html += `<div class="slider-value" id="slider-value">Medium — balanced effort! 💅</div>`;
     html += `<button class="next-button" onclick="submitSliderAnswer()">Continue →</button>`;
     html += `</div>`;
 
@@ -580,9 +687,20 @@ function renderSliderQuestion(question) {
 // ==========================================
 function setupOptionListeners() {
     document.querySelectorAll('.option-card').forEach(card => {
-        card.addEventListener('click', function () {
+        card.addEventListener('click', function(e) {
+            triggerHaptic('light');
+            createRipple(e, this);
+
             const index = parseInt(this.dataset.index);
-            selectOption(index);
+            selectOption(index, e);
+        });
+
+        // Touch feedback
+        card.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.97)';
+        });
+        card.addEventListener('touchend', function() {
+            this.style.transform = '';
         });
     });
 }
@@ -590,30 +708,51 @@ function setupOptionListeners() {
 function setupSliderListeners() {
     const slider = document.getElementById('maintenance-slider');
     const valueDisplay = document.getElementById('slider-value');
+    const labels = document.querySelectorAll('.slider-label');
 
     const messages = {
-        1: "Low maintenance — we love easy! 😌",
-        2: "Medium maintenance — you got this! 💅",
-        3: "High maintenance — go all out! 👑"
+        1: "Low — keep it easy! 😌",
+        2: "Medium — balanced effort! 💅",
+        3: "High — go all out! 👑"
     };
 
-    slider.addEventListener('input', function () {
-        valueDisplay.textContent = messages[this.value];
+    function updateSlider(value) {
+        valueDisplay.textContent = messages[value];
+        labels.forEach(label => {
+            label.classList.toggle('active', label.dataset.value === value);
+        });
+    }
+
+    slider.addEventListener('input', function() {
+        triggerHaptic('light');
+        updateSlider(this.value);
     });
+
+    // Initialize
+    updateSlider('2');
 }
 
 // ==========================================
 // HANDLE ANSWERS
 // ==========================================
-function selectOption(index) {
+function selectOption(index, event) {
     const question = questions[currentQuestion];
     const option = question.options[index];
+    const card = document.querySelector(`[data-index="${index}"]`);
+
+    // Create particle burst at click location
+    createParticleBurst(event.clientX, event.clientY, 15);
 
     // Visual feedback
-    document.querySelectorAll('.option-card').forEach(card => {
-        card.classList.remove('selected');
+    document.querySelectorAll('.option-card').forEach(c => {
+        c.classList.remove('selected');
+        c.style.pointerEvents = 'none';
     });
-    document.querySelector(`[data-index="${index}"]`).classList.add('selected');
+    card.classList.add('selected');
+
+    // Update streak
+    streak++;
+    totalPoints += 10 * streak;
 
     // Store answer
     answers.push({
@@ -634,17 +773,32 @@ function selectOption(index) {
         selectedBudget = option.budgetLevel;
     }
 
-    // Move to next question after short delay
+    // Animate out and move to next question
     setTimeout(() => {
-        nextQuestion();
-    }, 400);
+        const wrapper = document.querySelector('.question-wrapper');
+        wrapper.classList.add('exit');
+
+        setTimeout(() => {
+            nextQuestion();
+        }, 300);
+    }, 500);
 }
 
 function submitSliderAnswer() {
+    triggerHaptic('medium');
+
     const slider = document.getElementById('maintenance-slider');
     const value = parseInt(slider.value);
     const question = questions[currentQuestion];
     const option = question.options[value - 1];
+
+    // Create burst
+    const button = document.querySelector('.next-button');
+    const rect = button.getBoundingClientRect();
+    createParticleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 10);
+
+    streak++;
+    totalPoints += 10 * streak;
 
     answers.push({
         questionId: question.id,
@@ -652,14 +806,18 @@ function submitSliderAnswer() {
         scores: option.scores
     });
 
-    // Update scores
     if (option.scores) {
         Object.keys(option.scores).forEach(key => {
             scores[key] += option.scores[key];
         });
     }
 
-    nextQuestion();
+    const wrapper = document.querySelector('.question-wrapper');
+    wrapper.classList.add('exit');
+
+    setTimeout(() => {
+        nextQuestion();
+    }, 300);
 }
 
 // ==========================================
@@ -669,6 +827,7 @@ function nextQuestion() {
     currentQuestion++;
 
     if (currentQuestion >= questions.length) {
+        triggerHaptic('success');
         showLoadingScreen();
     } else {
         renderQuestion();
@@ -682,36 +841,38 @@ function showLoadingScreen() {
     showScreen('loading-screen');
 
     const loadingMessages = [
-        "Analyzing your style preferences",
+        "Analyzing your style choices",
         "Finding your perfect match",
         "Calculating your vibe score",
-        "Preparing your personalized result"
+        "Preparing something special"
     ];
 
     let messageIndex = 0;
     const loadingSubtext = document.getElementById('loading-subtext');
 
+    // Add dots animation
+    loadingSubtext.innerHTML = `${loadingMessages[0]}<span class="loading-dots"><span></span><span></span><span></span></span>`;
+
     const messageInterval = setInterval(() => {
         messageIndex++;
         if (messageIndex < loadingMessages.length) {
-            loadingSubtext.textContent = loadingMessages[messageIndex];
+            loadingSubtext.innerHTML = `${loadingMessages[messageIndex]}<span class="loading-dots"><span></span><span></span><span></span></span>`;
         }
     }, 600);
 
-    // Calculate and show results after loading animation
     setTimeout(() => {
         clearInterval(messageInterval);
         calculateAndShowResults();
-    }, 2500);
+    }, 2800);
 }
 
 // ==========================================
 // CALCULATE RESULTS (AI PREDICTION ENGINE)
 // ==========================================
 function calculateAndShowResults() {
-    // Find the winning wig style
+    // Find winning style
     let maxScore = 0;
-    let winningStyle = 'bodyWave'; // default
+    let winningStyle = 'bodyWave';
 
     Object.keys(scores).forEach(key => {
         if (scores[key] > maxScore) {
@@ -720,25 +881,18 @@ function calculateAndShowResults() {
         }
     });
 
-    // Calculate match percentage (normalized)
-    const totalPossibleScore = questions.length * 3; // max 3 points per question
+    // Calculate match percentage
+    const totalPossibleScore = questions.length * 3;
     let matchPercent = Math.round((scores[winningStyle] / totalPossibleScore) * 100);
-    // Ensure percentage is between 75-98 for engagement
-    matchPercent = Math.max(75, Math.min(98, matchPercent + 60));
-
-    // Add some randomness for replayability
-    matchPercent += Math.floor(Math.random() * 8) - 4;
-    matchPercent = Math.max(75, Math.min(98, matchPercent));
+    matchPercent = Math.max(78, Math.min(98, matchPercent + 65));
+    matchPercent += Math.floor(Math.random() * 6) - 3;
+    matchPercent = Math.max(78, Math.min(98, matchPercent));
 
     const style = wigStyles[winningStyle];
 
-    // Generate personalized "why it works" based on answers
+    // Generate personalized text
     const whyText = generateWhyText(winningStyle, answers);
-
-    // Get random affirmation
     const affirmation = style.affirmations[Math.floor(Math.random() * style.affirmations.length)];
-
-    // Adjust price based on budget selection
     const priceRange = getPriceRange(winningStyle, selectedBudget);
 
     // Populate result screen
@@ -754,7 +908,11 @@ function calculateAndShowResults() {
     document.getElementById('confidence-line').innerHTML = `<p>"${affirmation}"</p>`;
 
     showScreen('results-screen');
-    triggerConfetti();
+
+    // Delay confetti for dramatic effect
+    setTimeout(() => {
+        triggerConfetti();
+    }, 400);
 }
 
 // ==========================================
@@ -766,10 +924,10 @@ function generateWhyText(styleKey, userAnswers) {
     const occasionAnswer = userAnswers.find(a => a.questionId === 'occasion');
 
     const vibeDescriptions = {
-        sleek: "polished and sophisticated style",
-        bold: "bold and adventurous spirit",
+        sleek: "polished and sophisticated taste",
+        bold: "bold, adventurous spirit",
         textured: "appreciation for cultural beauty",
-        colorful: "playful and expressive personality"
+        colorful: "playful and expressive nature"
     };
 
     const confidenceDescriptions = {
@@ -779,16 +937,9 @@ function generateWhyText(styleKey, userAnswers) {
         boss: "commanding presence"
     };
 
-    const occasionDescriptions = {
-        everyday: "everyday versatility",
-        datenight: "head-turning glamour",
-        formal: "elegant occasions",
-        content: "camera-ready moments"
-    };
-
     const styleMatches = {
-        laceFront: "This lace front gives you that flawless, natural hairline that complements",
-        boneStraight: "The sleek bone straight style perfectly matches",
+        laceFront: "This lace front gives you that flawless, natural hairline that perfectly complements",
+        boneStraight: "The sleek bone straight style beautifully matches",
         curlyBob: "These bouncy curls bring out",
         bodyWave: "The flowing waves enhance",
         braided: "This braided style celebrates",
@@ -806,17 +957,13 @@ function generateWhyText(styleKey, userAnswers) {
         text += ` and ${confidenceDescriptions[confidenceAnswer.optionId]}`;
     }
 
-    text += ". ";
-
-    if (occasionAnswer && occasionDescriptions[occasionAnswer.optionId]) {
-        text += `Perfect for ${occasionDescriptions[occasionAnswer.optionId]}!`;
-    }
+    text += ". Perfect for making every moment count!";
 
     return text;
 }
 
 // ==========================================
-// GET PRICE RANGE BASED ON BUDGET
+// GET PRICE RANGE
 // ==========================================
 function getPriceRange(styleKey, budget) {
     const priceRanges = {
@@ -849,55 +996,75 @@ function getPriceRange(styleKey, budget) {
         }
     };
 
-    return priceRanges[budget]?.[styleKey] || wigStyles[styleKey]?.prices.join(' – ') || "₦15,000 – ₦40,000";
+    return priceRanges[budget]?.[styleKey] || "₦15,000 – ₦40,000";
 }
 
 // ==========================================
-// CONFETTI ANIMATION
+// CONFETTI - ENHANCED
 // ==========================================
 function triggerConfetti() {
     const confettiContainer = document.getElementById('confetti');
     confettiContainer.innerHTML = '';
 
-    const colors = ['#ec4899', '#8b5cf6', '#06b6d4', '#fbbf24', '#10b981', '#f472b6'];
-    const shapes = ['●', '■', '▲', '★', '♦'];
+    const colors = ['#ec4899', '#8b5cf6', '#06b6d4', '#fbbf24', '#10b981', '#f472b6', '#a855f7'];
+    const shapes = ['●', '■', '▲', '★', '♦', '❤', '✦'];
 
-    for (let i = 0; i < 50; i++) {
-        const confetti = document.createElement('div');
-        confetti.className = 'confetti-piece';
-        confetti.textContent = shapes[Math.floor(Math.random() * shapes.length)];
-        confetti.style.left = `${Math.random() * 100}%`;
-        confetti.style.color = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.fontSize = `${Math.random() * 15 + 8}px`;
-        confetti.style.animationDelay = `${Math.random() * 0.5}s`;
-        confetti.style.animationDuration = `${Math.random() * 2 + 2}s`;
-        confettiContainer.appendChild(confetti);
+    // Wave 1
+    for (let i = 0; i < 40; i++) {
+        createConfettiPiece(confettiContainer, colors, shapes, 0);
     }
 
-    // Clean up confetti after animation
+    // Wave 2
     setTimeout(() => {
-        confettiContainer.innerHTML = '';
-    }, 4000);
+        for (let i = 0; i < 30; i++) {
+            createConfettiPiece(confettiContainer, colors, shapes, 0);
+        }
+    }, 500);
+
+    // Wave 3
+    setTimeout(() => {
+        for (let i = 0; i < 20; i++) {
+            createConfettiPiece(confettiContainer, colors, shapes, 0);
+        }
+    }, 1000);
+
+    setTimeout(() => confettiContainer.innerHTML = '', 5000);
+}
+
+function createConfettiPiece(container, colors, shapes, delay) {
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti-piece';
+    confetti.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+    confetti.style.left = `${Math.random() * 100}%`;
+    confetti.style.color = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.fontSize = `${Math.random() * 18 + 10}px`;
+    confetti.style.animationDelay = `${delay + Math.random() * 0.3}s`;
+    confetti.style.animationDuration = `${Math.random() * 2 + 3}s`;
+    container.appendChild(confetti);
 }
 
 // ==========================================
 // SHARE FUNCTIONALITY
 // ==========================================
 function shareResult() {
+    triggerHaptic('medium');
+
     const wigName = document.getElementById('wig-name').textContent;
     const matchPercent = document.getElementById('match-percent').textContent;
 
-    const shareText = `I just discovered I'm a ${wigName} with ${matchPercent} match! 👑✨ Take the Wig Vibe Quiz and find your perfect style!`;
+    const shareText = `I just discovered I'm a ${wigName} with ${matchPercent} match! 👑✨\n\nTake the Wig Vibe Quiz and find YOUR perfect style!`;
+
+    // Create burst effect
+    const button = document.querySelector('.share-button');
+    const rect = button.getBoundingClientRect();
+    createParticleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 15);
 
     if (navigator.share) {
         navigator.share({
-            title: 'Wig Vibe Quiz Result',
+            title: 'My Wig Vibe Quiz Result',
             text: shareText,
             url: window.location.href
-        }).catch(() => {
-            // Fallback to clipboard
-            copyToClipboard(shareText);
-        });
+        }).catch(() => copyToClipboard(shareText));
     } else {
         copyToClipboard(shareText);
     }
@@ -905,15 +1072,17 @@ function shareResult() {
 
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(() => {
-        // Show feedback
         const shareBtn = document.querySelector('.share-button');
-        const originalText = shareBtn.innerHTML;
+        const originalHTML = shareBtn.innerHTML;
         shareBtn.innerHTML = '<span>✓</span> Copied!';
+        shareBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+
         setTimeout(() => {
-            shareBtn.innerHTML = originalText;
+            shareBtn.innerHTML = originalHTML;
+            shareBtn.style.background = '';
         }, 2000);
     }).catch(() => {
-        alert('Copy this to share: ' + text);
+        alert('Share this: ' + text);
     });
 }
 
@@ -921,22 +1090,40 @@ function copyToClipboard(text) {
 // REPLAY FUNCTIONALITY
 // ==========================================
 function replayQuiz() {
-    // Add slight animation before restart
-    const resultsScreen = document.getElementById('results-screen');
-    resultsScreen.style.opacity = '0';
-    resultsScreen.style.transform = 'translateY(20px)';
+    triggerHaptic('medium');
 
-    setTimeout(() => {
-        resultsScreen.style.opacity = '';
-        resultsScreen.style.transform = '';
-        startQuiz();
-    }, 300);
+    const button = document.querySelector('.replay-button');
+    const rect = button.getBoundingClientRect();
+    createParticleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 12);
+
+    setTimeout(() => startQuiz(), 300);
 }
 
 // ==========================================
-// INITIALIZE
+// INITIALIZE - Add welcome screen interactions
 // ==========================================
-document.addEventListener('DOMContentLoaded', function () {
-    // Preload any necessary assets
-    console.log('Wig Vibe Quiz loaded! 💇🏾‍♀️✨');
+document.addEventListener('DOMContentLoaded', function() {
+    // Make preview wigs interactive
+    document.querySelectorAll('.preview-wig').forEach((wig, index) => {
+        wig.addEventListener('click', function(e) {
+            triggerHaptic('light');
+            createParticleBurst(e.clientX, e.clientY, 8);
+
+            // Add bounce effect
+            this.style.animation = 'none';
+            this.offsetHeight; // Trigger reflow
+            this.style.animation = `wigPop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)`;
+        });
+    });
+
+    // Make logo interactive
+    const logo = document.querySelector('.logo-badge');
+    if (logo) {
+        logo.addEventListener('click', function(e) {
+            triggerHaptic('light');
+            createParticleBurst(e.clientX, e.clientY, 15);
+        });
+    }
+
+    console.log('✨ Wig Vibe Quiz loaded! Ready to find your perfect style! 💇🏾‍♀️');
 });
