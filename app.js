@@ -1100,6 +1100,246 @@ function replayQuiz() {
 }
 
 // ==========================================
+// TRY-ON FEATURE
+// ==========================================
+let cameraStream = null;
+let facingMode = 'user';
+let wigPosition = { x: 0, y: 5 };
+let wigScale = 100;
+let currentTryOnWig = null;
+
+function openTryOn() {
+    triggerHaptic('medium');
+    currentTryOnWig = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+    showScreen('tryon-screen');
+    setupTryOn();
+}
+
+function closeTryOn() {
+    stopCamera();
+    showScreen('results-screen');
+}
+
+function setupTryOn() {
+    updateWigOverlay();
+    populateWigSelector();
+    resetTryOnState();
+}
+
+function resetTryOnState() {
+    document.getElementById('tryon-placeholder').classList.remove('hidden');
+    document.getElementById('wig-overlay').classList.add('hidden');
+    document.getElementById('tryon-controls').classList.remove('active');
+    document.querySelector('.tryon-actions').style.display = 'flex';
+    document.getElementById('capture-actions').style.display = 'none';
+    document.getElementById('save-actions').style.display = 'none';
+    document.getElementById('camera-feed').classList.remove('active');
+    document.getElementById('photo-canvas').classList.remove('active');
+    document.getElementById('uploaded-photo').classList.remove('active');
+}
+
+function updateWigOverlay() {
+    const overlay = document.getElementById('wig-overlay');
+    if (currentTryOnWig && wigStyles[currentTryOnWig]) {
+        overlay.innerHTML = wigStyles[currentTryOnWig].svg;
+        overlay.style.top = `${wigPosition.y}%`;
+        overlay.style.left = `calc(50% + ${wigPosition.x}px)`;
+        overlay.style.width = `${wigScale}%`;
+    }
+}
+
+function populateWigSelector() {
+    const container = document.getElementById('wig-options');
+    container.innerHTML = '';
+    Object.keys(wigStyles).forEach(key => {
+        const option = document.createElement('div');
+        option.className = `wig-option ${key === currentTryOnWig ? 'active' : ''}`;
+        option.innerHTML = wigStyles[key].svg;
+        option.onclick = () => selectTryOnWig(key);
+        container.appendChild(option);
+    });
+}
+
+function selectTryOnWig(key) {
+    currentTryOnWig = key;
+    updateWigOverlay();
+    document.querySelectorAll('.wig-option').forEach(opt => opt.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+}
+
+async function toggleCamera() {
+    if (cameraStream) {
+        stopCamera();
+    } else {
+        await startCamera();
+    }
+}
+
+async function startCamera() {
+    try {
+        const constraints = {
+            video: {
+                facingMode: facingMode,
+                width: { ideal: 640 },
+                height: { ideal: 480 }
+            }
+        };
+        cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
+        const video = document.getElementById('camera-feed');
+        video.srcObject = cameraStream;
+        video.classList.add('active');
+
+        document.getElementById('tryon-placeholder').classList.add('hidden');
+        document.getElementById('wig-overlay').classList.remove('hidden');
+        document.getElementById('tryon-controls').classList.add('active');
+
+        document.querySelector('.tryon-actions').style.display = 'none';
+        document.getElementById('capture-actions').style.display = 'flex';
+        document.getElementById('camera-button').innerHTML = '<span>⏹️</span> Stop Camera';
+    } catch (err) {
+        alert('Could not access camera. Please allow camera access or try uploading a photo instead.');
+        console.error('Camera error:', err);
+    }
+}
+
+function stopCamera() {
+    if (cameraStream) {
+        cameraStream.getTracks().forEach(track => track.stop());
+        cameraStream = null;
+    }
+    document.getElementById('camera-feed').classList.remove('active');
+    document.getElementById('camera-feed').srcObject = null;
+    document.getElementById('camera-button').innerHTML = '<span>📸</span> Use Camera';
+
+    if (!document.getElementById('photo-canvas').classList.contains('active') &&
+        !document.getElementById('uploaded-photo').classList.contains('active')) {
+        resetTryOnState();
+    }
+}
+
+function switchCamera() {
+    facingMode = facingMode === 'user' ? 'environment' : 'user';
+    if (cameraStream) {
+        stopCamera();
+        startCamera();
+    }
+}
+
+function capturePhoto() {
+    const video = document.getElementById('camera-feed');
+    const canvas = document.getElementById('photo-canvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    if (facingMode === 'user') {
+        ctx.translate(canvas.width, 0);
+        ctx.scale(-1, 1);
+    }
+    ctx.drawImage(video, 0, 0);
+
+    stopCamera();
+    canvas.classList.add('active');
+
+    document.getElementById('capture-actions').style.display = 'none';
+    document.getElementById('save-actions').style.display = 'flex';
+}
+
+function triggerUpload() {
+    document.getElementById('photo-upload').click();
+}
+
+function handleUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const img = document.getElementById('uploaded-photo');
+        img.src = e.target.result;
+        img.classList.add('active');
+
+        document.getElementById('tryon-placeholder').classList.add('hidden');
+        document.getElementById('camera-feed').classList.remove('active');
+        document.getElementById('photo-canvas').classList.remove('active');
+        document.getElementById('wig-overlay').classList.remove('hidden');
+        document.getElementById('tryon-controls').classList.add('active');
+
+        document.querySelector('.tryon-actions').style.display = 'none';
+        document.getElementById('capture-actions').style.display = 'none';
+        document.getElementById('save-actions').style.display = 'flex';
+
+        stopCamera();
+    };
+    reader.readAsDataURL(file);
+    event.target.value = '';
+}
+
+function retakePhoto() {
+    document.getElementById('photo-canvas').classList.remove('active');
+    document.getElementById('uploaded-photo').classList.remove('active');
+    document.getElementById('save-actions').style.display = 'none';
+    document.querySelector('.tryon-actions').style.display = 'flex';
+    document.getElementById('tryon-placeholder').classList.remove('hidden');
+    document.getElementById('wig-overlay').classList.add('hidden');
+    document.getElementById('tryon-controls').classList.remove('active');
+}
+
+function savePhoto() {
+    const preview = document.getElementById('tryon-preview');
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    let sourceEl = document.getElementById('photo-canvas');
+    if (!sourceEl.classList.contains('active')) {
+        sourceEl = document.getElementById('uploaded-photo');
+    }
+
+    const rect = preview.getBoundingClientRect();
+    canvas.width = rect.width * 2;
+    canvas.height = rect.height * 2;
+    ctx.scale(2, 2);
+
+    ctx.drawImage(sourceEl, 0, 0, rect.width, rect.height);
+
+    const wigOverlay = document.getElementById('wig-overlay');
+    const wigSvg = wigOverlay.querySelector('svg');
+    if (wigSvg) {
+        const svgData = new XMLSerializer().serializeToString(wigSvg);
+        const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+        const url = URL.createObjectURL(svgBlob);
+
+        const img = new Image();
+        img.onload = function() {
+            const wigRect = wigOverlay.getBoundingClientRect();
+            const previewRect = preview.getBoundingClientRect();
+            const x = wigRect.left - previewRect.left;
+            const y = wigRect.top - previewRect.top;
+            ctx.drawImage(img, x, y, wigRect.width, wigRect.height);
+            URL.revokeObjectURL(url);
+
+            const link = document.createElement('a');
+            link.download = 'wig-tryon.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        };
+        img.src = url;
+    }
+}
+
+function moveWig(direction) {
+    const step = 5;
+    switch(direction) {
+        case 'up': wigPosition.y -= step; break;
+        case 'down': wigPosition.y += step; break;
+        case 'left': wigPosition.x -= step; break;
+        case 'right': wigPosition.x += step; break;
+    }
+    updateWigOverlay();
+}
+
+// ==========================================
 // INITIALIZE - Add welcome screen interactions
 // ==========================================
 document.addEventListener('DOMContentLoaded', function() {
@@ -1125,5 +1365,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    console.log('✨ Wig Vibe Quiz loaded! Ready to find your perfect style! 💇🏾‍♀️');
+    // Wig size slider
+    const sizeSlider = document.getElementById('wig-size');
+    if (sizeSlider) {
+        sizeSlider.addEventListener('input', function() {
+            wigScale = parseInt(this.value);
+            updateWigOverlay();
+        });
+    }
+
+    console.log('✨ Wig Vibe Quiz with Try-On loaded! 💇🏾‍♀️');
 });

@@ -189,15 +189,96 @@
                 </div>
 
                 <div class="result-actions">
-                    <button class="share-button" onclick="shareResult()">
-                        <span>📱</span> Share Result
+                    <button class="tryon-button" onclick="openTryOn()">
+                        <span>📸</span> Try It On
                     </button>
-                    <button class="replay-button" onclick="replayQuiz()">
-                        <span>🔄</span> Try Another Vibe
+                    <button class="share-button" onclick="shareResult()">
+                        <span>📱</span> Share
                     </button>
                 </div>
 
+                <button class="replay-button-full" onclick="replayQuiz()">
+                    <span>🔄</span> Try Another Vibe
+                </button>
+
                 <p class="replay-hint">Feeling a different vibe? Tap above to explore another wig mood!</p>
+            </div>
+        </section>
+
+        <!-- Try-On Screen -->
+        <section id="tryon-screen" class="screen">
+            <div class="tryon-content">
+                <div class="tryon-header">
+                    <button class="back-button" onclick="closeTryOn()">
+                        <span>←</span> Back
+                    </button>
+                    <h2 class="tryon-title">Virtual Try-On</h2>
+                    <div class="placeholder"></div>
+                </div>
+
+                <div class="privacy-notice">
+                    <span>🔒</span> Your photo stays on your device only. We never save or upload it.
+                </div>
+
+                <div class="tryon-preview" id="tryon-preview">
+                    <div class="tryon-placeholder" id="tryon-placeholder">
+                        <span class="camera-icon">📷</span>
+                        <p>Take a photo or upload one to try on your wig!</p>
+                    </div>
+                    <video id="camera-feed" autoplay playsinline></video>
+                    <canvas id="photo-canvas"></canvas>
+                    <img id="uploaded-photo" alt="Your photo">
+                    <div class="wig-overlay" id="wig-overlay"></div>
+                </div>
+
+                <div class="tryon-controls" id="tryon-controls">
+                    <div class="size-control">
+                        <label>Wig Size</label>
+                        <input type="range" id="wig-size" min="50" max="150" value="100">
+                    </div>
+                    <div class="position-control">
+                        <label>Position</label>
+                        <div class="position-buttons">
+                            <button onclick="moveWig('up')">↑</button>
+                            <button onclick="moveWig('down')">↓</button>
+                            <button onclick="moveWig('left')">←</button>
+                            <button onclick="moveWig('right')">→</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tryon-actions">
+                    <button class="camera-button" id="camera-button" onclick="toggleCamera()">
+                        <span>📸</span> Use Camera
+                    </button>
+                    <button class="upload-button" onclick="triggerUpload()">
+                        <span>🖼️</span> Upload Photo
+                    </button>
+                    <input type="file" id="photo-upload" accept="image/*" onchange="handleUpload(event)" style="display:none">
+                </div>
+
+                <div class="capture-actions" id="capture-actions" style="display:none">
+                    <button class="capture-button" onclick="capturePhoto()">
+                        <span>📸</span> Take Photo
+                    </button>
+                    <button class="switch-camera-button" onclick="switchCamera()">
+                        <span>🔄</span> Switch
+                    </button>
+                </div>
+
+                <div class="save-actions" id="save-actions" style="display:none">
+                    <button class="save-button" onclick="savePhoto()">
+                        <span>💾</span> Save Photo
+                    </button>
+                    <button class="retake-button" onclick="retakePhoto()">
+                        <span>🔄</span> Retake
+                    </button>
+                </div>
+
+                <div class="wig-selector" id="wig-selector">
+                    <p class="selector-label">Try other styles:</p>
+                    <div class="wig-options" id="wig-options"></div>
+                </div>
             </div>
         </section>
     </div>

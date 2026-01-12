@@ -1341,3 +1341,353 @@ body {
         padding-bottom: env(safe-area-inset-bottom);
     }
 }
+
+/* ==========================================
+   TRY-ON SCREEN
+   ========================================== */
+#tryon-screen {
+    padding-top: 1rem;
+}
+
+.tryon-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.tryon-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.back-button {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    transition: var(--transition-smooth);
+}
+
+.back-button:hover {
+    color: var(--primary-pink);
+}
+
+.tryon-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+}
+
+.tryon-header .placeholder {
+    width: 60px;
+}
+
+.privacy-notice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: var(--border-radius-sm);
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    color: var(--accent-green);
+}
+
+.tryon-preview {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3/4;
+    max-height: 400px;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    margin-bottom: 1rem;
+    border: 2px solid rgba(139, 92, 246, 0.2);
+}
+
+.tryon-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+}
+
+.tryon-placeholder.hidden {
+    display: none;
+}
+
+.tryon-placeholder .camera-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.tryon-placeholder p {
+    font-size: 0.95rem;
+}
+
+#camera-feed, #photo-canvas, #uploaded-photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+#camera-feed.active, #photo-canvas.active, #uploaded-photo.active {
+    display: block;
+}
+
+#camera-feed {
+    transform: scaleX(-1);
+}
+
+.wig-overlay {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    pointer-events: none;
+    z-index: 10;
+    transition: all 0.1s ease;
+}
+
+.wig-overlay.hidden {
+    display: none;
+}
+
+.wig-overlay svg {
+    width: 100%;
+    height: auto;
+}
+
+.tryon-controls {
+    display: none;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: var(--card-bg);
+    border-radius: var(--border-radius-sm);
+}
+
+.tryon-controls.active {
+    display: flex;
+}
+
+.size-control, .position-control {
+    flex: 1;
+}
+
+.tryon-controls label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.tryon-controls input[type="range"] {
+    width: 100%;
+    height: 8px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(139, 92, 246, 0.2);
+    border-radius: 10px;
+    outline: none;
+}
+
+.tryon-controls input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.position-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
+
+.position-buttons button {
+    background: rgba(139, 92, 246, 0.2);
+    border: none;
+    color: var(--text-primary);
+    padding: 0.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: var(--transition-smooth);
+}
+
+.position-buttons button:hover {
+    background: var(--primary-purple);
+}
+
+.position-buttons button:first-child {
+    grid-column: 2;
+}
+
+.tryon-actions, .capture-actions, .save-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.camera-button, .upload-button, .capture-button, .switch-camera-button, .save-button, .retake-button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--transition-bounce);
+    font-family: inherit;
+    border: none;
+}
+
+.camera-button, .capture-button {
+    background: var(--gradient-primary);
+    color: white;
+}
+
+.upload-button, .switch-camera-button, .retake-button {
+    background: transparent;
+    border: 2px solid var(--primary-purple);
+    color: var(--text-primary);
+}
+
+.save-button {
+    background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%);
+    color: white;
+}
+
+.camera-button:hover, .capture-button:hover, .save-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+.upload-button:hover, .switch-camera-button:hover, .retake-button:hover {
+    background: rgba(139, 92, 246, 0.15);
+}
+
+.wig-selector {
+    margin-top: auto;
+    padding-top: 1rem;
+}
+
+.selector-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+}
+
+.wig-options {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+}
+
+.wig-option {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    background: var(--card-bg);
+    border: 2px solid rgba(139, 92, 246, 0.2);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: var(--transition-bounce);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+.wig-option:hover {
+    border-color: var(--primary-pink);
+    transform: scale(1.05);
+}
+
+.wig-option.active {
+    border-color: var(--primary-pink);
+    background: rgba(236, 72, 153, 0.15);
+}
+
+.wig-option svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Try-on button in results */
+.tryon-button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.1rem 1.5rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--transition-bounce);
+    font-family: inherit;
+    border: none;
+    background: var(--gradient-primary);
+    color: white;
+    box-shadow: var(--shadow-glow);
+}
+
+.tryon-button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: var(--shadow-glow-strong);
+}
+
+.replay-button-full {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--transition-bounce);
+    font-family: inherit;
+    background: transparent;
+    border: 2px solid var(--primary-purple);
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.replay-button-full:hover {
+    background: rgba(139, 92, 246, 0.15);
+    transform: translateY(-2px);
+}
